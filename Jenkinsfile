@@ -15,6 +15,7 @@ pipeline {
                 sh 'cat Jenkinsfile'
                 sh 'cat ansible_key'
                 sh 'cat hosts'
+                sh 'whoami'
                 // sh 'ssh-keygen -b 2048 -t rsa -f .ssh/demo -q -N "" '
                 // sh 'cp ansible_key .ssh/ansible_key'
                 sh 'chmod 400 ansible_key'
