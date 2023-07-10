@@ -10,8 +10,8 @@ pipeline {
 
         stage('Deploy Mysql container') {
             steps {
+                sh 'rm -rf .ssh'
                 sh 'ls -la '
-                sh 'ls -la .ssh'
                 sh 'cat Jenkinsfile'
                 sh 'cat ansible_key'
                 sh 'cat hosts'
