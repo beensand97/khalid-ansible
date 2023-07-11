@@ -14,6 +14,10 @@
     - name: install docker
       apt:
         name: docker
+    - name: create a file
+      shell: echo "abc" > /home/ubuntu/newfile
+    - name: new task 
+      shell: touch a
     # - name: Re-create a container
     #   docker_container:
     #     name: khalid-springboot
@@ -27,21 +31,21 @@
     #     pull: true
     #     comparisons:
     #       image: strict
-    - name: Re-create a container
-      docker_container:
-        name: nginx
-        image: nginx
-        state: started
-        recreate: yes
-        exposed_ports:
-          - 80
-        published_ports:
-          - 80:80
-        pull: true
-        comparisons:
-          image: stric
+    # - name: Re-create a container
+    #   docker_container:
+    #     name: nginx
+    #     image: nginx
+    #     state: started
+    #     recreate: yes
+    #     exposed_ports:
+    #       - 80
+    #     published_ports:
+    #       - 80:80
+    #     pull: true
+    #     comparisons:
+    #       image: stric
 
-    - name: Prune everything
-      community.docker.docker_prune:
-        containers: true
-        images: true
+    # - name: Prune everything
+    #   community.docker.docker_prune:
+    #     containers: true
+    #     images: true
