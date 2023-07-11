@@ -60,9 +60,14 @@
         pull: true
         comparisons:
           image: strict
-
+    - name: Copy file with owner and permissions
+      ansible.builtin.copy:
+        src: ./script
+        dest: /home/ubuntu/script
+        owner: ubuntu
+        group: ubuntu
     - name: SLEEP now !!!
-      shell: sleep 10 && docker exec -i khalid-mysql --network test mysql --user=root --password=password123_DONG < script
+      shell: sleep 10 && sudo docker exec -i khalid-mysql mysql --user=root --password=password123_DONG < script
 
     # - name: Run a simple command (command)
     #   community.docker.docker_container_exec:
