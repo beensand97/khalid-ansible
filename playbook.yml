@@ -43,7 +43,10 @@
       docker_container:
         name: khalid-mysql
         image: khaliddinh/mysql
-        networks: test
+        networks:
+          - name: test
+            aliases:
+              - test
         env:
           MYSQL_ROOT_PASSWORD: password123_DONG
           MYSQL_DATABASE: db_example
