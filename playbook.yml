@@ -61,6 +61,9 @@
         comparisons:
           image: strict
 
+    - name: SLEEP now !!!
+      shell: sleep 10
+
     - name: Run a simple command (command)
       community.docker.docker_container_exec:
         container: khalid-mysql
