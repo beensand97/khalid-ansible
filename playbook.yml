@@ -50,7 +50,7 @@
         exposed_ports:
           - 80
         published_ports:
-          - 80:80
+          - 8081:80
     # - name: Re-create a container
     #   docker_container:
     #     name: khalid-springboot
