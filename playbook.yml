@@ -6,10 +6,14 @@
   tasks:
     - name: update 
       yum: name=* state=latest
-    - name: install docker
-      apt:
-        name: docker
-    - name: Re-create a container
+    - name: Install Docker
+      yum:
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+        state: latest
+        update_cache: true
       docker_container:
         name: khalid-springboot
         image: khaliddinh/mysql-spring
