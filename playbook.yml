@@ -4,8 +4,6 @@
   become_user: root
   become_method: sudo
   tasks:  
-    - name: show 
-      shell: echo $HOSTNAME
     - name: update 
       apt:
         upgrade: yes
@@ -51,6 +49,24 @@
           - 80
         published_ports:
           - 8081:80
+    - name: Re-create a container
+      docker_container:
+        name: khalid-springboot
+        image: khaliddinh/mysql-spring
+        state: started
+        recreate: yes
+        exposed_ports:
+          - 8080
+        published_ports:
+          - 8080:8080
+        pull: true
+        comparisons:
+          image: strict
+
+    - name: Prune everything
+      community.docker.docker_prune:
+        containers: true
+        images: true
     # - name: Re-create a container
     #   docker_container:
     #     name: khalid-springboot
