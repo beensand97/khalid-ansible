@@ -14,19 +14,32 @@
     - name: install docker
       apt:
         name: docker
+    # - name: Re-create a container
+    #   docker_container:
+    #     name: khalid-springboot
+    #     image: khaliddinh/mysql-spring
+    #     state: started
+    #     recreate: yes
+    #     exposed_ports:
+    #       - 8080
+    #     published_ports:
+    #       - 8080:8080
+    #     pull: true
+    #     comparisons:
+    #       image: strict
     - name: Re-create a container
       docker_container:
-        name: khalid-springboot
-        image: khaliddinh/mysql-spring
+        name: nginx
+        image: nginx
         state: started
         recreate: yes
         exposed_ports:
-          - 8080
+          - 80
         published_ports:
-          - 8080:8080
+          - 80:80
         pull: true
         comparisons:
-          image: strict
+          image: stric
 
     - name: Prune everything
       community.docker.docker_prune:
