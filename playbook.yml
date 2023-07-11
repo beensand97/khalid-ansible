@@ -3,7 +3,9 @@
   become: yes
   become_user: root
   become_method: sudo
-  tasks:
+  tasks:  
+    - name: show 
+      shell: echo $HOSTNAME
     - name: update 
       apt:
         upgrade: yes
