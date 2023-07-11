@@ -1,37 +1,22 @@
 - name : ec2instance-playbook
-  hosts: awsjenkinsagent
+  hosts: host
   become: yes
   become_user: root
   become_method: sudo
   tasks:
-    - name: create a file
-      shell: echo "abc" > /home/ec2-user/newfile
-    # - name: new task 
-    #   shell: touch a
-    # - name: install docker
-    #   apt:
-    #     name: docker
-    - name: deploy app
-      shell: |
-        docker image rm hoangledinh65/springboot-image:1.0 || echo "this image does not exist" 
-        docker container stop my-demo-springboot || echo "this container does not exist" 
-        echo y | docker container prune 
-        echo y | docker image prune
-        docker container run -d --rm --name my-demo-springboot -p 8082:8080 hoangledinh65/springboot-image:1.0
-    # - name: install java
-    #   apt:  
-    #     name: openjdk-8-jdk
-    #     update_cache: yes
+    - name: install docker
+      apt:
+        name: docker
     - name: Re-create a container
       docker_container:
-        name: my-demo-springboot
-        image: hoangledinh65/springboot-image:1.1
+        name: khalid-springboot
+        image: khaliddinh/mysql-spring
         state: started
         recreate: yes
         exposed_ports:
           - 8080
         published_ports:
-          - 8082:8080
+          - 8080:8080
         pull: true
         comparisons:
           image: strict
