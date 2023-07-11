@@ -5,15 +5,14 @@
   become_method: sudo
   tasks:
     - name: update 
-      yum: name=* state=latest
-    - name: Install Docker
-      yum:
-        name:
-          - docker-ce
-          - docker-ce-cli
-          - containerd.io
-        state: latest
-        update_cache: true
+      apt:
+        upgrade: yes
+        update_cache: yes
+        cache_valid_time: 86400 
+    - name: install docker
+      apt:
+        name: docker
+    - name: Re-create a container
       docker_container:
         name: khalid-springboot
         image: khaliddinh/mysql-spring
