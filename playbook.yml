@@ -42,7 +42,7 @@
     - name: Re-create a MySQL container
       docker_container:
         name: khalid-mysql
-        image: khaliddinh/mysql
+        image: mysql:8.0
         networks:
           - name: test
             aliases:
