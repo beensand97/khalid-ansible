@@ -44,7 +44,11 @@
         name: khalid-mysql
         image: khaliddinh/mysql
         networks: test
-        env_file: env_file
+        env:
+          MYSQL_ROOT_PASSWORD: password123_DONG
+          MYSQL_DATABASE: db_example
+          # MYSQL_USER: wordpress
+          # MYSQL_PASSWORD: wordpress
         detach: true
         state: started
         recreate: yes
