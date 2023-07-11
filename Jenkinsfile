@@ -8,22 +8,23 @@ pipeline {
     stages {
 
         stage('Deploy Mysql container') {
+           
             steps {
-                // sh 'rm -rf .ssh'
-                sh 'ls -la '
-                sh 'cat Jenkinsfile'
-                sh 'cat ansible_key'
-                sh 'cat hosts'
-                sh 'whoami'
-                // sh 'ssh-keygen -b 2048 -t rsa -f .ssh/demo -q -N "" '
-                // sh 'cp ansible_key .ssh/ansible_key'
-                // sh 'chmod 400 ansible_key'
-                // sh 'ls -la .ssh'
-                sh 'chmod 400 ansible_key'
-                sh 'ansible --version '
-                sh 'echo yes | ansible all -m shell -i hosts --private-key ansible_key -a "echo $HOSTNAME" '
+                withCredentials([file(credentialsId: 'ansible_key', variable: 'ansible')]) {
+                    sh 'ls -la'
+                    sh "cp \$ansible ansible_key"
+                    sh 'ansible --version'
+                    sh 'ansible all -m shell -i hosts --private-key ansible_key -a "echo $HOSTNAME"'
+                    // some block
+            }
             }
         }
         
+    }
+    post {
+        // Clean after build
+        always {
+            cleanWs()
+        }
     }
 }
