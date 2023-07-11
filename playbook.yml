@@ -68,8 +68,7 @@
       community.docker.docker_container_exec:
         container: khalid-mysql
         argv:
-          - mysql
-          - " --user=root --password=password123_DONG < script"
+          - "mysql --user=root --password=password123_DONG < script"
       register: result
     - name: Re-create a Spring container
       docker_container:
