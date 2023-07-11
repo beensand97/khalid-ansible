@@ -11,13 +11,46 @@
         upgrade: yes
         update_cache: yes
         cache_valid_time: 86400 
-    - name: install docker
+    - name: Install required system packages
       apt:
-        name: docker
-    - name: create a file
-      shell: echo "abc" > /home/ubuntu/newfile
-    - name: new task 
-      shell: touch a
+        pkg:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - software-properties-common
+          - python3-pip
+          - virtualenv
+          - python3-setuptools
+        state: latest
+        update_cache: true
+    - name: Add Docker GPG apt Key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: Add Docker Repository
+      apt_repository:
+        repo: deb https://download.docker.com/linux/ubuntu focal stable
+        state: present
+
+    - name: Update apt and install docker-ce
+      apt:
+        name: docker-ce
+        state: latest
+        update_cache: true
+    - name: Pull default Docker image
+      community.docker.docker_image:
+        name: "nginx"
+        source: pull
+    - name: Create default containers
+      community.docker.docker_container:
+        name: "khalid-nginx"
+        image: "nginx"
+        state: present
+        exposed_ports:
+          - 80
+        published_ports:
+          - 80:80
     # - name: Re-create a container
     #   docker_container:
     #     name: khalid-springboot
