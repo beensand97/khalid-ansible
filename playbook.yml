@@ -62,12 +62,12 @@
           image: strict
 
     - name: SLEEP now !!!
-      shell: sleep 20
+      shell: sleep 10 && docker exec -i khalid-mysql mysql --user=root --password=password123_DONG < script
 
-    - name: Run a simple command (command)
-      community.docker.docker_container_exec:
-        container: khalid-mysql
-        command: echo "abcd" > /root/test
+    # - name: Run a simple command (command)
+    #   community.docker.docker_container_exec:
+    #     container: khalid-mysql
+    #     command: echo "abcd" > /root/test
     - name: Re-create a Spring container
       docker_container:
         name: khalid-springboot
