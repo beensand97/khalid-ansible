@@ -20,8 +20,9 @@ pipeline {
                 // sh 'cp ansible_key .ssh/ansible_key'
                 // sh 'chmod 400 ansible_key'
                 // sh 'ls -la .ssh'
+                sh 'chmod 400 ansible_key'
                 sh 'ansible --version '
-                sh 'echo y | ansible all -m shell -i hosts --private-key ansible_key -a "echo $HOME" '
+                sh 'echo yes | ansible all -m shell -i hosts --private-key ansible_key -a "echo $HOSTNAME" '
             }
         }
         
