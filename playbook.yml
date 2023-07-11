@@ -4,11 +4,11 @@
   become_user: root
   become_method: sudo
   tasks:
-    - name: update
-      apt:
-        upgrade: yes
-        update_cache: yes
-        cache_valid_time: 86400
+    # - name: update
+    #   apt:
+    #     upgrade: yes
+    #     update_cache: yes
+    #     cache_valid_time: 86400
     - name: Install required system packages
       apt:
         pkg:
@@ -36,6 +36,7 @@
         name: docker-ce
         state: latest
         update_cache: true
+
     - name: Create a docker network
       docker_network:
         name: test
