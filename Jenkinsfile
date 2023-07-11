@@ -5,22 +5,19 @@ pipeline {
             image 'khaliddinh/ansible'
         }
     }
-    // environment {
-    //     ANSIBLE_HOST_KEY_CHECKING = 'False'
-    // }
+    environment {
+        ANSIBLE_HOST_KEY_CHECKING = 'False'
+    }
     stages {
 
         stage('Deploy Mysql container') {
            
             steps {
-                withCredentials([file(credentialsId: 'ansible_key', variable: 'ansible')]) {
+                withCredentials([file(credentialsId: 'ansible_key', variable: 'ansible_key')]) {
                     sh 'ls -la'
-                    sh "cp \$ansible ansible_key"
                     sh 'ansible --version'
                     sh 'ls -la'
-                    // sh 'cat config >> ./ansible.cfg '
-                    sh 'ansible all -m shell -i hosts --private-key ansible_key -a "echo $HOSTNAME"'
-                    // some block
+                    sh 'ansible-playbook -i hosts --private-key ansible_key playbook.yml'
             }
             }
         }
