@@ -2,7 +2,6 @@ pipeline {
 
     agent{
         docker {
-            alwaysPull true
             image 'khaliddinh/ansible'
         }
     }
