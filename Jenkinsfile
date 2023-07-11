@@ -5,9 +5,9 @@ pipeline {
             image 'khaliddinh/ansible'
         }
     }
-    environment {
-        ANSIBLE_HOST_KEY_CHECKING = 'False'
-    }
+    // environment {
+    //     ANSIBLE_HOST_KEY_CHECKING = 'False'
+    // }
     stages {
 
         stage('Deploy Mysql container') {
