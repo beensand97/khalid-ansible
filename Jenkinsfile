@@ -15,7 +15,6 @@ pipeline {
             steps {
                 withCredentials([file(credentialsId: 'ansible_key', variable: 'ansible_key')]) {
                     sh 'ls -la'
-                    sh 'ls -la .ssh'
                     sh "cp /$ansible_key ansible_key"
                     sh 'ansible --version'
                     sh 'ls -la'
