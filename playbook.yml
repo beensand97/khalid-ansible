@@ -1,14 +1,14 @@
-- name : ec2instance-playbook
+- name: ec2instance-playbook
   hosts: host
   become: yes
   become_user: root
   become_method: sudo
-  tasks:  
-    - name: update 
+  tasks:
+    - name: update
       apt:
         upgrade: yes
         update_cache: yes
-        cache_valid_time: 86400 
+        cache_valid_time: 86400
     - name: Install required system packages
       apt:
         pkg:
@@ -36,32 +36,36 @@
         name: docker-ce
         state: latest
         update_cache: true
-    - name: Pull default Docker image
-      community.docker.docker_image:
-        name: "nginx"
-        source: pull
-    - name: Create default containers
-      community.docker.docker_container:
-        name: "khalid-nginx"
-        image: "nginx"
-        state: present
-        exposed_ports:
-          - 80
-        published_ports:
-          - 8081:80
-    - name: Re-create a container
+    - name: Create a docker network
+      docker_network:
+        name: test
+    - name: Re-create a MySQL container
       docker_container:
-        name: khalid-springboot
-        image: khaliddinh/mysql-spring
+        name: khalid-mysql
+        image: khaliddinh/mysql
+        networks: test
+        env_file: env_file
+        detach: true
         state: started
         recreate: yes
         exposed_ports:
-          - 8080
-        published_ports:
-          - 8080:8080
+          - 3306
         pull: true
         comparisons:
           image: strict
+    # - name: Re-create a container
+    #   docker_container:
+    #     name: khalid-springboot
+    #     image: khaliddinh/mysql-spring
+    #     state: started
+    #     recreate: yes
+    #     exposed_ports:
+    #       - 8080
+    #     published_ports:
+    #       - 8080:8080
+    #     pull: true
+    #     comparisons:
+    #       image: strict
 
     - name: Prune everything
       community.docker.docker_prune:
