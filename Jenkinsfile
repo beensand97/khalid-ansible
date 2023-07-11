@@ -14,6 +14,8 @@ pipeline {
                     sh 'ls -la'
                     sh "cp \$ansible ansible_key"
                     sh 'ansible --version'
+                    sh 'ls -la'
+                    sh 'cat ansible_key'
                     sh 'ansible all -m shell -i hosts --private-key ansible_key -a "echo $HOSTNAME"'
                     // some block
             }
