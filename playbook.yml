@@ -62,7 +62,7 @@
           image: strict
 
     - name: SLEEP now !!!
-      shell: sleep 10
+      shell: sleep 20
 
     - name: Run a simple command (command)
       community.docker.docker_container_exec:
