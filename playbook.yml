@@ -4,11 +4,11 @@
   become_user: root
   become_method: sudo
   tasks:
-    # - name: update
-    #   apt:
-    #     upgrade: yes
-    #     update_cache: yes
-    #     cache_valid_time: 86400
+    - name: update
+      apt:
+        upgrade: yes
+        update_cache: yes
+        cache_valid_time: 86400
     - name: Install required system packages
       apt:
         pkg:
@@ -43,7 +43,7 @@
     - name: Re-create a MySQL container
       docker_container:
         name: khalid-mysql
-        image: khaliddinh/mysql
+        image: mysql:8.0
         networks:
           - name: test
             aliases:
@@ -51,8 +51,6 @@
         env:
           MYSQL_ROOT_PASSWORD: password123_DONG
           MYSQL_DATABASE: db_example
-          # MYSQL_USER: wordpress
-          # MYSQL_PASSWORD: wordpress
         detach: true
         state: started
         recreate: yes
@@ -97,34 +95,3 @@
       community.docker.docker_prune:
         containers: true
         images: true
-    # - name: Re-create a container
-    #   docker_container:
-    #     name: khalid-springboot
-    #     image: khaliddinh/mysql-spring
-    #     state: started
-    #     recreate: yes
-    #     exposed_ports:
-    #       - 8080
-    #     published_ports:
-    #       - 8080:8080
-    #     pull: true
-    #     comparisons:
-    #       image: strict
-    # - name: Re-create a container
-    #   docker_container:
-    #     name: nginx
-    #     image: nginx
-    #     state: started
-    #     recreate: yes
-    #     exposed_ports:
-    #       - 80
-    #     published_ports:
-    #       - 80:80
-    #     pull: true
-    #     comparisons:
-    #       image: stric
-
-    # - name: Prune everything
-    #   community.docker.docker_prune:
-    #     containers: true
-    #     images: true
