@@ -60,6 +60,11 @@
         pull: true
         comparisons:
           image: strict
+
+    - name: Run a simple command (command)
+      community.docker.docker_container_exec:
+        container: khalid-mysql
+        command: mysql --user=root --password=password123_DONG < script
     - name: Re-create a Spring container
       docker_container:
         name: khalid-springboot
