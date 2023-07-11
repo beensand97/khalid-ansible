@@ -4,6 +4,11 @@
   become_user: root
   become_method: sudo
   tasks:
+    - name: update 
+      apt:
+        upgrade: yes
+        update_cache: yes
+        cache_valid_time: 86400 
     - name: install docker
       apt:
         name: docker
