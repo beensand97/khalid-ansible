@@ -5,10 +5,7 @@
   become_method: sudo
   tasks:
     - name: update 
-      apt:
-        upgrade: yes
-        update_cache: yes
-        cache_valid_time: 86400 
+      yum: name=* state=latest
     - name: install docker
       apt:
         name: docker
