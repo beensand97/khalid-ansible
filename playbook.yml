@@ -75,7 +75,7 @@
     - name: Re-create a Spring container
       docker_container:
         name: khalid-springboot
-        image: khaliddinh/mysql-spring
+        image: khaliddinh/springboot
         networks:
           - name: test
             aliases:
