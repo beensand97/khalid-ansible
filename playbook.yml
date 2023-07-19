@@ -68,10 +68,6 @@
     - name: SLEEP now !!!
       shell: sleep 15 && sudo docker exec -i khalid-mysql mysql --user=root --password=password123_DONG < script
 
-    # - name: Run a simple command (command)
-    #   community.docker.docker_container_exec:
-    #     container: khalid-mysql
-    #     command: mysql --user=root --password=password123_DONG < script
     - name: Re-create a Spring container
       docker_container:
         name: khalid-springboot
